@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-export default function Login() {
+export default function login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [secureMode, setSecureMode] = useState(true);
@@ -75,10 +75,17 @@ export default function Login() {
             />
 
             <TouchableOpacity
-              onPress={() => setSecureMode((prev) => !prev)}
-              style={styles.eyeButton}
+              activeOpacity={0.7}
+              onPressIn={(e) => {
+                e.stopPropagation();
+              }}
+              onPress={() => {
+                setSecureMode((prev) => !prev);
+              }}
             >
-              <Text>{secureMode ? "Show" : "Hide"}</Text>
+              <Text style={styles.showText}>
+                {secureMode ? "Hide" : "Show"}
+              </Text>
             </TouchableOpacity>
           </View>
 
@@ -127,7 +134,7 @@ export default function Login() {
           <View style={styles.signupContainer}>
             <Text style={styles.signupText}>Don't have an account? </Text>
 
-            <Link href="/" asChild>
+            <Link href="/sign" asChild>
               <TouchableOpacity>
                 <Text style={styles.signupLink}>Sign up</Text>
               </TouchableOpacity>
@@ -150,7 +157,7 @@ const styles = StyleSheet.create({
 
   topSection: {
     width: "100%",
-    height: 370,
+    height: 280,
     position: "relative",
   },
 
@@ -191,7 +198,7 @@ const styles = StyleSheet.create({
     height: 54,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#aaa",
+    backgroundColor: "#eee",
     borderRadius: 14,
     paddingHorizontal: 15,
     marginBottom: 10,
@@ -209,11 +216,14 @@ const styles = StyleSheet.create({
     height: 54,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#aaa",
+    backgroundColor: "#eee",
     borderRadius: 14,
     paddingHorizontal: 15,
   },
-
+  showText: {
+    color: "#aba117",
+    fontWeight: "600",
+  },
   passwordInput: {
     flex: 1,
     height: "100%",
@@ -239,7 +249,7 @@ const styles = StyleSheet.create({
   loginButton: {
     width: "100%",
     height: 52,
-    backgroundColor: "#297c14",
+    backgroundColor: "#e6d80a",
     borderRadius: 12,
     justifyContent: "center",
     alignItems: "center",
@@ -316,7 +326,7 @@ const styles = StyleSheet.create({
   },
 
   signupLink: {
-    color: "#198754",
+    color: "#cbd50e",
     fontSize: 15,
     fontWeight: "bold",
   },
